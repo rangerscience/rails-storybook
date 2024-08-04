@@ -1,0 +1,37 @@
+name: Test & lint
+on: [push, pull_request]
+
+jobs:
+  tests:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: '20'
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+
+      - run: bundle install
+
+      - name: RSpec
+        run: bundle exec rspec
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+
+      - run: bundle install
+
+      - name: Run linter
+        run: bundle exec rubocop
