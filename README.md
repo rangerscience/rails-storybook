@@ -14,15 +14,40 @@ Add this line to your application's Gemfile:
 gem 'rails-storybook'
 ```
 
-TODO
+Then:
+```bash
+rails g storybook:install
+```
+
+Then, optionally:
+```bash
+rails g storybook:example
+```
+
+Restart your processes (stop and restart `./bin/dev`) and viola! Opens up a Storybook connected to your Rails server, and if you've also generated the example, will have a simple View Component showing up in Storybook.
 
 ## Usage
 
-TODO: Write usage instructions here
+Today, write a JSON to describe your View Component's "story":
+```
+  {
+    "title": "ExampleComponent",
+    "stories": [
+      {
+        "name": "default",
+        "parameters": {
+          "server": { "id": "example_component/default" }
+        }
+      }
+    ]
+  }
+```
+
+Tomorrow(tm), run a rake task to generate those stories for you.
 
 ## Development
 
-TODO
+Inspired by [gem view_component-storybook](https://github.com/jonspalmer/view_component-storybook), but, I want to accomplish things in a different way (using the existing view component previews), to aim higher (handling view components, partials, *and* React components), and to aim specifically at integration with Chromatic.
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
