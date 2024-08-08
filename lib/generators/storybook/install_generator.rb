@@ -1,4 +1,4 @@
-require 'rails/generators'
+require "rails/generators"
 
 class Storybook::InstallGenerator < Rails::Generators::Base
   def install_storybook
@@ -45,8 +45,8 @@ class Storybook::InstallGenerator < Rails::Generators::Base
   def update_storybook
     # Main.js
     insert_into_file ".storybook/main.js", "\n    \"@storybook/server\",", after: "addons: ["
-    gsub_file '.storybook/main.js', "*.stories.@(js|jsx|mjs|ts|tsx)", "*.stories.@(js|jsx|mjs|ts|tsx|json)"
-    gsub_file '.storybook/main.js', "@storybook/react-webpack5", "@storybook/server-webpack5"
+    gsub_file ".storybook/main.js", "*.stories.@(js|jsx|mjs|ts|tsx)", "*.stories.@(js|jsx|mjs|ts|tsx|json)"
+    gsub_file ".storybook/main.js", "@storybook/react-webpack5", "@storybook/server-webpack5"
 
     # Preview.js
     base_url = "http://localhost:3000/rails/view_components"

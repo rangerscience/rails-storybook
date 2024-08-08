@@ -1,4 +1,4 @@
-require 'rails/generators'
+require "rails/generators"
 
 class Storybook::ExampleGenerator < Rails::Generators::Base
   def install_view_components
