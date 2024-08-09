@@ -1,6 +1,5 @@
 require "storybook/version"
+require "storybook/preview"
+require "storybook/railtie" if defined?(Rails::Railtie)
 
-module Storybook
-  class Error < StandardError; end
-  # Your code goes here...
-end
+module Storybook; end
