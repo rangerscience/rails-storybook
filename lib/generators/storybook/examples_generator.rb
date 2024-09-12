@@ -1,6 +1,6 @@
 require "rails/generators"
 
-class Storybook::ExampleGenerator < Rails::Generators::Base
+class Storybook::ExamplesGenerator < Rails::Generators::Base
   def install_view_components
     insert_into_file "Gemfile", "gem 'view_component'"
     system "bundle install"
@@ -28,7 +28,7 @@ class Storybook::ExampleGenerator < Rails::Generators::Base
       # frozen_string_literal: true
 
       class ExampleComponentPreview < ViewComponent::Preview
-        layout "storybook"
+        include Storybook::Preview
         def default
           render(ExampleComponent.new(title: "title"))
         end
@@ -44,19 +44,23 @@ class Storybook::ExampleGenerator < Rails::Generators::Base
     RUBY
   end
 
-  def create_example_story
-    create_file "stories/example_component.stories.json", <<~JSON
-      {
-        "title": "ExampleComponent",
-        "stories": [
-          {
-            "name": "default",
-            "parameters": {
-              "server": { "id": "example_component/default" }
-            }
-          }
-        ]
-      }
-    JSON
+  def create_example_partial
+    create_file "app/views/application/_example.html.slim", <<~SLIM
+      span
+        = @title
+    SLIM
+  end
+
+  def create_example_partial_preview
+    # TODO: It goes here so the ViewComponent stuff can find it, but really should go elsewhere
+    create_file "test/components/previews/example_partial_preview.rb", <<~RUBY
+      # frozen_string_literal: true
+      class ExamplePartialPreview < ViewComponent::Preview
+        include Storybook::Preview
+        def default
+          render(Storybook::PartialPreviewComponent.new(partial: "application/example"))
+        end
+      end
+    RUBY
   end
 end

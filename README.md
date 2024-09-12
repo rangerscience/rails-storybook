@@ -21,33 +21,36 @@ rails g storybook:install
 
 Then, optionally:
 ```bash
-rails g storybook:example
+rails g storybook:examples
 ```
 
 Restart your processes (stop and restart `./bin/dev`) and viola! Opens up a Storybook connected to your Rails server, and if you've also generated the example, will have a simple View Component showing up in Storybook.
 
 ## Usage
 
-Today, write a JSON to describe your View Component's "story":
+Write a preview for your component, just like normal - but include the StoryBook::Preview module. You can also use the `PartialPreviewComponent` to render regular Rails partials as previews.
+```ruby
+class ExampleComponentPreview < ViewComponent::Preview
+  include Storybook::Preview
+  def default
+    render(ExampleComponent.new(title: "title"))
+  end
+  
+  def default
+    render(PartialPreviewComponent.new(partial: "application/example"))
+  end
+end
 ```
-  {
-    "title": "ExampleComponent",
-    "stories": [
-      {
-        "name": "default",
-        "parameters": {
-          "server": { "id": "example_component/default" }
-        }
-      }
-    ]
-  }
-```
+Note that the module will set the preview's layout to `storybook`, as there's steps to be done to make it look good (and work!) inside of Storybook.
 
-Tomorrow(tm), run a rake task to generate those stories for you.
+Then run `rake storybook:stories` to generate the CSF JSON that Storybook uses to find your previews.
+
+And... that's it! :D  
+
 
 ## Development
 
-Inspired by [gem view_component-storybook](https://github.com/jonspalmer/view_component-storybook), but, I want to accomplish things in a different way (using the existing view component previews), to aim higher (handling view components, partials, *and* React components), and to aim specifically at integration with Chromatic.
+Inspired by [gem view_component-storybook](https://github.com/jonspalmer/view_component-storybook), but, I want to accomplish things in a different way, to aim higher (handling ~~view components~~, ~~partials~~, *and* React components), and to aim specifically at integration with Chromatic.
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 

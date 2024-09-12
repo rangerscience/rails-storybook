@@ -54,4 +54,25 @@ class Storybook::InstallGenerator < Rails::Generators::Base
 
     # insert_into_file ".storybook/main.js", "@storybook/addon-controls", after: "addons: ["
   end
+
+  def create_storybook_layout
+    # TODO: TailwindCSS / etc
+    create_file "app/views/layouts/storybook.html.slim", <<~SLIM
+      doctype html
+      html lang='en'
+        head
+          title Trainyard
+          meta charset="UTF-8"
+          meta[name="viewport" content="width=device-width,initial-scale=1"]
+          = csrf_meta_tags
+          = csp_meta_tag
+          = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
+          = stylesheet_link_tag "application"
+          = javascript_pack_tag "application"
+        body
+          div
+            main.ml-64.p-8
+              == yield
+    SLIM
+  end
 end

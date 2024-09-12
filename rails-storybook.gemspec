@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rails", "~> 7.0"
   spec.add_dependency "slim", "~> 5.2"
+  spec.add_dependency "react_on_rails", "~> 14.0"
   spec.add_development_dependency "rails", "~> 7.0"
 
   spec.add_development_dependency "bundler", "~> 2.5"

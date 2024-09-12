@@ -5,7 +5,7 @@ namespace :storybook do
     Dir.glob("#{previews_dir}/**/*_preview.rb").each { |file| require file }
 
     stories = ViewComponent::Preview.descendants.map do |preview|
-      [ preview.component_name&.underscore, preview.to_csf ] if preview < Storybook::Preview
+      [ preview.preview_name&.underscore, preview.to_csf ] if preview < Storybook::Preview
     end
 
     stories_dir = "stories"
