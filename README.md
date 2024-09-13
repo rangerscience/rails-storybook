@@ -28,25 +28,29 @@ Restart your processes (stop and restart `./bin/dev`) and viola! Opens up a Stor
 
 ## Usage
 
-Write a preview for your component, just like normal - but include the StoryBook::Preview module. You can also use the `PartialPreviewComponent` to render regular Rails partials as previews.
+Write [rails-previews](https://github.com/rangerscience/rails-previews) for your partials, view components, and react-on-rails components -
+
 ```ruby
-class ExampleComponentPreview < ViewComponent::Preview
-  include Storybook::Preview
-  def default
-    render(ExampleComponent.new(title: "title"))
-  end
-  
-  def default
-    render(PartialPreviewComponent.new(partial: "application/example"))
+module Previews
+  class Example < Rails::Previews::Preview
+    def partial
+      render_partial "application/example", title: "Hello, World!"
+    end
+
+    def view_component
+      ExampleComponent.new(title: "Hello, World!")
+    end
+    
+    def react_component
+      render_react_on_rails "HelloWorld", name: "Hello, World!"
+    end
   end
 end
 ```
-Note that the module will set the preview's layout to `storybook`, as there's steps to be done to make it look good (and work!) inside of Storybook.
 
 Then run `rake storybook:stories` to generate the CSF JSON that Storybook uses to find your previews.
 
-And... that's it! :D  
-
+And... that's it! :D Just turn on Storybook to see your examples :)
 
 ## Development
 

@@ -23,6 +23,10 @@ class Storybook::InstallGenerator < Rails::Generators::Base
     RUBY
   end
 
+  def mount_previews
+    insert_into_file "config/routes.rb", "  mount Rails::Previews::Engine => \"/previews\"\n", after: "Rails.application.routes.draw do\n"
+  end
+
   def update_storybook
     # Main.js
     insert_into_file ".storybook/main.js", "\n    \"@storybook/server\",", after: "addons: ["
