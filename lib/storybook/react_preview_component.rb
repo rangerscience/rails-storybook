@@ -6,7 +6,7 @@ module Storybook
     include ReactOnRails::Helper
 
     slim_template <<~SLIM
-      = react_component @component, props: @props
+      = react_component @component, props: @props, prerender: true
     SLIM
 
     def initialize(component, **props)
