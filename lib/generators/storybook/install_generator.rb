@@ -30,6 +30,7 @@ class Storybook::InstallGenerator < Rails::Generators::Base
   def update_storybook
     # Main.js
     insert_into_file ".storybook/main.js", "\n    \"@storybook/server\",", after: "addons: ["
+    # TODO: Switch to YAML from JSON for stories (should be supported by Storybook)
     gsub_file ".storybook/main.js", "*.stories.@(js|jsx|mjs|ts|tsx)", "*.stories.json"
     gsub_file ".storybook/main.js", "@storybook/react-webpack5", "@storybook/server-webpack5"
 
