@@ -12,7 +12,7 @@ class Storybook::ExamplesGenerator < Rails::Generators::Base
     create_file "spec/previews/example_partial.rb", <<~RUBY
       # frozen_string_literal: true
       module Previews
-        class ExamplePartial < Rails::Previews::Preview
+        class ExamplePartial < RailsPreviews::Preview
           def default
             render_partial "application/example", locals: { title: "Hello, World!" }
           end
@@ -48,7 +48,7 @@ class Storybook::ExamplesGenerator < Rails::Generators::Base
       # frozen_string_literal: true
 
       module Previews
-        class ExampleViewComponent < Rails::Previews::Preview
+        class ExampleViewComponent < RailsPreviews::Preview
           def default
             ExampleComponent.new(title: "Hello, World!")
           end
@@ -129,7 +129,7 @@ class Storybook::ExamplesGenerator < Rails::Generators::Base
       # frozen_string_literal: true
 
       module Previews
-        class ExampleReactComponent < Rails::Previews::Preview
+        class ExampleReactComponent < RailsPreviews::Preview
           def default
             render_react_on_rails "HelloWorld", props: { name: "Hello, World!" }
           end

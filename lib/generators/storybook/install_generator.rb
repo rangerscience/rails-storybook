@@ -24,7 +24,7 @@ class Storybook::InstallGenerator < Rails::Generators::Base
   end
 
   def mount_previews
-    insert_into_file "config/routes.rb", "  mount Rails::Previews::Engine => \"/previews\"\n", after: "Rails.application.routes.draw do\n"
+    insert_into_file "config/routes.rb", "  mount RailsPreviews::Engine => \"/previews\"\n", after: "Rails.application.routes.draw do\n"
   end
 
   def update_storybook

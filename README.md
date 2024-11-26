@@ -32,7 +32,7 @@ Write [rails-previews](https://github.com/rangerscience/rails-previews) for your
 
 ```ruby
 module Previews
-  class Example < Rails::Previews::Preview
+  class Example < RailsPreviews::Preview
     def partial
       render_partial "application/example", title: "Hello, World!"
     end

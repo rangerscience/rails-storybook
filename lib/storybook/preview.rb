@@ -1,5 +1,5 @@
 
-module Rails::Previews
+module RailsPreviews
   # Re-open the class to add the Storybook methods
   class Preview
     class << self
