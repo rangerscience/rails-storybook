@@ -6,7 +6,9 @@ namespace :storybook do
     RailsPreviews::Preview.all.map do |preview|
       filename = Rails.root.join("#{stories_dir}/#{preview.preview_name}.stories.json")
       stories_json = JSON.pretty_generate(preview.to_csf)
-      File.open(filename, "w") { |f| f.write(stories_json) }
+      file = Pathname(filename)
+      file.dirname.mkpath unless file.dirname.exist?
+      file.write(stories_json)
     end
   end
 end
